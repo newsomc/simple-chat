@@ -1,0 +1,137 @@
+body {
+  margin-top: 60px;
+}
+.fr {
+  float: right;
+}
+.fl {
+  float: left;
+}
+.fn {
+  float: none;
+}
+.tc {
+  text-align: center;
+}
+.tr {
+  text-align: right;
+}
+.tl {
+  text-align: leftr;
+}
+.hidden {
+  display: none;
+}
+.teaser {
+  margin-bottom: 20px;
+  background-color: whiteSmoke;
+  display: block;
+  padding: 8.5px;
+  line-height: 18px;
+  border: 1px solid #CCC;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.users ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.users ul a {
+  display: block;
+  padding: 1em;
+  border: 1px solid #CCC;
+  background: #F8FEFF;
+  cursor: pointer;
+}
+.users ul a:hover {
+  background: #F0FAFF;
+}
+.users .active .icon {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  margin-right: 8px;
+  margin-top: 3px;
+  vertical-align: top;
+  background-color: #3DAD6B;
+}
+body .chat-box {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 280px;
+  border-width: 1px 1px 0 1px;
+  border-style: solid;
+  border-color: #AAA;
+}
+body .chat-box ul {
+  padding: 0;
+  margin: 0;
+}
+body .chat-box .inner {
+  padding: 10px;
+}
+body .chat-box textarea {
+  width: 250px;
+  height: 50px;
+}
+body .chat-box form {
+  margin: 0;
+}
+body .chat-box .messages {
+  width: 244px;
+  padding: 0 7px;
+  height: 120px;
+  margin-bottom: 4px;
+  overflow-y: scroll;
+}
+body .chat-box .messages ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+body .chat-box .titlebar {
+  background: -webkit-linear-gradient(top, #333333, #222222);
+}
+body .chat-box .title {
+  padding: 10px;
+  color: #FAFAFA;
+}
+body .chat-box .title a {
+  background: #efefef;
+  display: inline-block;
+  padding: 2px 2px 0 2px;
+  border-radius: 2px;
+}
+body .chat-box .title a:hover {
+  background: #cfcfcf;
+}
+body .chat-box .wrapper {
+  padding: 0 0 4px 0;
+}
+body .chat-box pre {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre;
+  white-space: pre-wrap;
+  background: none;
+  border: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  background: none;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.4);
+}

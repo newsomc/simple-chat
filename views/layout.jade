@@ -1,0 +1,27 @@
+doctype 5
+html
+	head
+		title Chat
+		link(rel='stylesheet', href='/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
+		link(rel='stylesheet', href='/css/style.css')
+
+		script(type='text/javascript', src='/socket.io/socket.io.js')
+		script(type='text/javascript', src='/js/jquery-1.7.2.min.js')
+		script(type='text/javascript', src='/js/underscore.min.js')
+		script(type='text/javascript', src='/js/bootstrap.min.js')
+		script(type='text/javascript', src='/js/handlebars.js')
+		script(type='text/javascript', src='/js/handlebars.helpers.js')
+		script(type='text/javascript', src='/js/handlebars.runtime.min.js')
+		script(type='text/javascript', src='/js/jquery-ui-1.8.22.custom.min.js')
+		script(type='text/javascript', src='/js/app.js')
+
+		include ga.jade
+
+	body
+		div.navbar.navbar-fixed-top
+			div.navbar-inner
+				div.container
+					a.brand(href='/') Chat
+					a.fr.logout(href='/logout') Log Out
+		block content

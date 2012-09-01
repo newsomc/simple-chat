@@ -1,0 +1,1 @@
+handlebars handlebars/message.handlebars handlebars/chat-box.handlebars handlebars/chat-list.handlebars handlebars/chat-item.handlebars -f handlebars.runtime.min.js -k name -k ifnotme -m

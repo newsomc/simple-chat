@@ -1,0 +1,372 @@
+span.intLink, #chessClosePanel {
+	cursor: pointer;
+}
+
+a.chessCtrlBtn:link, span.chessCtrlBtn {
+	margin: 0 20px;
+	text-decoration: none;
+	-moz-user-select: none;
+	color: #000000;
+	cursor: default;
+	height: 21px;
+	padding: 0 8px;
+	font: 13px / 20px "Lucida Grande", sans-serif;
+	background: rgb(235, 235, 235);
+	-moz-box-shadow:
+		0 1px 0 rgba(0, 0, 0, 0.15),
+		inset 0 1px 0 rgba(0, 0, 0, 0.2),
+		inset 0 0 1px rgba(0, 0, 0, 0.8),
+		inset 0 0 1px #000,
+		inset 0 10px 5px -5px rgba(255, 255, 255, 1),
+		inset 0 -20px 10px -10px rgba(255, 255, 255, 0.8),
+		inset 0 -13px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow:
+		0 1px 0 rgba(0, 0, 0, 0.15),
+		inset 0 1px 0 rgba(0, 0, 0, 0.2),
+		inset 0 0 1px rgba(0, 0, 0, 0.8),
+		inset 0 0 1px #000,
+		inset 0 10px 5px -5px rgba(255, 255, 255, 1),
+		inset 0 -20px 10px -10px rgba(255, 255, 255, 0.8),
+		inset 0 -13px rgba(0, 0, 0, 0.1);
+	box-shadow:
+		0 1px 0 rgba(0, 0, 0, 0.15),
+		inset 0 1px 0 rgba(0, 0, 0, 0.2),
+		inset 0 0 1px rgba(0, 0, 0, 0.8),
+		inset 0 0 1px #000,
+		inset 0 10px 5px -5px rgba(255, 255, 255, 1),
+		inset 0 -20px 10px -10px rgba(255, 255, 255, 0.8),
+		inset 0 -13px rgba(0, 0, 0, 0.1);
+}
+a.chessCtrlBtn:active:hover, span.chessCtrlBtn:active:hover {
+	background-color: #79A7D5;
+	-moz-box-shadow:
+		0 1px 0 rgba(0, 0, 0, 0.15),
+		inset 0 1px 0 rgba(0, 0, 0, 0.2),
+		inset 0 0 1px rgba(0, 0, 0, 0.8),
+		inset 0 0 1px #000,
+		inset 0 10px 5px -5px rgba(255, 255, 255, 0.4),
+		inset 0 -20px 10px -10px #A4D6F1,
+		inset 0 -13px #387CC0;
+	-webkit-box-shadow:
+		0 1px 0 rgba(0, 0, 0, 0.15),
+		inset 0 1px 0 rgba(0, 0, 0, 0.2),
+		inset 0 0 1px rgba(0, 0, 0, 0.8),
+		inset 0 0 1px #000,
+		inset 0 10px 5px -5px rgba(255, 255, 255, 0.4),
+		inset 0 -20px 10px -10px #A4D6F1,
+		inset 0 -13px #387CC0;
+	box-shadow:
+		0 1px 0 rgba(0, 0, 0, 0.15),
+		inset 0 1px 0 rgba(0, 0, 0, 0.2),
+		inset 0 0 1px rgba(0, 0, 0, 0.8),
+		inset 0 0 1px #000,
+		inset 0 10px 5px -5px rgba(255, 255, 255, 0.4),
+		inset 0 -20px 10px -10px #A4D6F1,
+		inset 0 -13px #387CC0;
+}
+div.chessFilmBox {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: #ffffaa;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+	z-index: 10000000;
+}
+
+div.gnotify {
+	padding: 10px;
+	z-index: 10000001;
+}
+
+/** Normal Style Positions **/
+div.gnotify { position: fixed; }
+
+div.gnotify.top-left {
+	left: 0;
+	top: 0;
+}
+
+div.gnotify.top-right {
+	right: 0;
+	top: 0;
+}
+
+div.gnotify.bottom-left {
+	left: 0;
+	bottom: 0;
+}
+
+div.gnotify.bottom-right {
+	right: 0;
+	bottom: 0;
+}
+
+div.gnotify.center {
+	top: 0;
+	width: 50%;
+	left: 25%;
+}
+
+div.gnotify-message span.intLink, div.gnotify-message a, div.gnotify-message a:link, div.gnotify-message a:visited, div.gnotify-message a:hover {
+	font-weight: bold;
+	text-decoration: inherit;
+	color: inherit;
+}
+
+/** Cross Browser Styling **/
+div.center div.gnotify-notification, div.center div.gnotify-closer {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.gnotify div.gnotify-notification, div.gnotify div.gnotify-closer {
+	background-color: #000000;
+	color: #ffffff;
+	opacity: 0.85;
+	filter: alpha(opacity=85);
+	width: 235px;
+	padding: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-align: left;
+	display: none;
+}
+
+div.gnotify div.gnotify-notification { min-height: 40px; }
+
+div.gnotify div.gnotify-notification div.header {
+	font-weight: bold;
+	font-size: 10px;
+}
+
+div.gnotify div.gnotify-notification div.close {
+	float: right;
+	font-weight: bold;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+div.gnotify div.gnotify-closer {
+	height: 15px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	cursor: pointer;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#chessboardsBox {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	top: 0;
+	clear: both;
+	overflow: visible;
+	background-color: #87a1c0;
+}
+#chessSizeHandle {
+	background-color: transparent;
+	color: #333333;
+	font-size: 24px;
+	line-height: 24px;
+	width: auto;
+	height: auto;
+	position: absolute;
+	right: -12px;
+	bottom: -12px;
+	float: right;
+	margin-top: auto;
+	cursor: se-resize;
+}
+
+#chess3DBox {
+	/**
+	* width: [DYNAMIC VALUE];
+	* height: [DYNAMIC VALUE];
+	*/
+	float: left;
+}
+
+#chess2DBox {
+	/**
+	* width: [DYNAMIC VALUE];
+	* height: [DYNAMIC VALUE];
+	*/
+	float: right;
+}
+
+#board {
+	position: fixed;
+	top: 100px;
+}
+#boardContainer{
+	position: absolute;
+	right: 560px;
+}
+
+#chessCtrlPanel {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 140px;
+	height: auto;
+	overflow: hidden;
+	
+	color: #ffffff;
+	font-size: 12px;
+	font-family: Tahoma, Arial, Verdana, Helvetica;
+		background-color: #2C2C2C;
+	background-image: -moz-linear-gradient(top,#333,#222);
+	background-image: -ms-linear-gradient(top,#333,#222);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#333),to(#222));
+	background-image: -webkit-linear-gradient(top,#333,#222);
+	background-image: -o-linear-gradient(top,#333,#222);
+	background-image: linear-gradient(top,#333,#222);
+}
+
+#chessCtrlPanel form {
+	clear: both;
+}
+
+#chessClosePanel {
+	width: auto;
+	height: auto;
+	margin: 0 12px 1px auto;
+	float: right;
+}
+
+#chessCtrlPanel p {
+	margin-top: 6px;
+	text-align: center;
+}
+
+#chessInfo span.intLink {
+	color: #ffffff;
+	text-decoration: underline;
+}
+
+span.infoKey, span.infoVal {
+	color: #ffffff;
+	cursor: pointer;
+}
+
+span.infoKey {
+	font-weight: bold;
+}
+
+#chessMoves {
+	width: 92%;
+	height: 120px;
+	padding: 4px;
+	margin-bottom: 0;
+}
+
+#chessMoves, #chessAlgebraic {
+	background-color: transparent;
+	color: #999;
+}
+
+#chessAlgebraic {
+	display: none;
+}
+
+#chessInfo p {
+	text-align: center;
+	margin: 6px 4px 6px 4px;
+}
+
+#chessCurtain {
+	display:table;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background-color: #000000;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+	z-index: 10000002;
+}
+
+#chessLoading {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	color: #ffff00;
+}
+
+hr {
+	width: 30%;
+	margin-top: 32px;
+	margin-bottom: 24px;
+}
+
+img.tbBtn {
+	cursor: pointer;
+	margin: 1px 3px 1px 3px;
+}
+
+#pgnTable {
+	width: auto;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+	border: 0;
+}
+
+#pgnTable tr td { padding: 2px; }
+
+#chessDesk {
+	clear: both;
+	width: auto;
+	height: auto;
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+
+#chessToolBar {
+	height: auto;
+	background-color: #969696;
+	-moz-box-shadow: inset 0 25px 27px -10px #BDBDBD;
+	-webkit-box-shadow: inset 0 25px 27px -10px #BDBDBD;
+	box-shadow: inset 0 25px 27px -10px #BDBDBD;
+	border-bottom: 1px solid #424242;
+	text-align:center;
+	padding: 6px 3px 2px 3px;
+}
+
+#setViewBtns {
+	width: auto;
+	float: left;
+}
+
+#setViewBtns span {
+	margin: 0 3px;
+	display: inline-block;
+	font: 12px / 13px "Lucida Grande", sans-serif;
+	text-shadow: rgba(255, 255, 255, 0.4) 0 1px;
+	padding: 3px 6px;
+	background-color: #969696;
+	cursor: default;
+	-moz-box-shadow: rgba(255, 255, 255, 0.4) 0 1px, inset 0 20px 20px -10px white;
+	-webkit-box-shadow: rgba(255, 255, 255, 0.4) 0 1px, inset 0 20px 20px -10px white;
+	box-shadow: rgba(255, 255, 255, 0.4) 0 1px, inset 0 20px 20px -10px white;
+}
+#setViewBtns span.pressedBtn {
+	background: #B5B5B5;
+	-moz-box-shadow: inset rgba(0, 0, 0, 0.4) 0 -5px 12px, inset rgba(0, 0, 0, 1) 0 1px 3px, rgba(255, 255, 255, 0.4) 0 1px;
+	-webkit-box-shadow: inset rgba(0, 0, 0, 0.4) 0 -5px 12px, inset rgba(0, 0, 0, 1) 0 1px 3px, rgba(255, 255, 255, 0.4) 0 1px;
+	box-shadow: inset rgba(0, 0, 0, 0.4) 0 -5px 12px, inset rgba(0, 0, 0, 1) 0 1px 3px, rgba(255, 255, 255, 0.4) 0 1px;
+}
+.ctrlBtns {
+	display: none;
+}
+#chessCtrlPanel form {
+	margin-bottom: 0;
+}

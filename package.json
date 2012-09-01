@@ -1,0 +1,24 @@
+{
+  "name": "chat",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.0.0rc4",
+    "commander": "*",
+    "mongoose": "*",
+    "jade": "*",
+    "winston": "*",
+    "winston-mongodb": "*",
+    "nconf": "*",
+    "socket.io": "*",
+    "passport": "*",
+    "passport-google": "*",
+    "connect-mongo": "*",
+    "connect": "*",
+    "cookie": "*",
+    "underscore": "*"
+  }
+}

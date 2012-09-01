@@ -1,0 +1,11 @@
+<ul>
+	{{#each users}}
+		{{#ifnotme ../me user}}
+			<li>
+				<a href='#' data-user='{{user}}' class='{{status}}' title='{{displayName}}'>
+					<span class='icon'></span>{{displayName}}
+				</a>
+			</li>
+		{{/ifnotme}}
+	{{/each}}
+</ul>

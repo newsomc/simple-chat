@@ -1,0 +1,25 @@
+<div class='chat-box'>
+	<div class='titlebar'>
+		<div class='title'>
+			{{other_user.displayName}}
+			<a href='#' class='close-chat-box fr' data-other-user='{{other_user._id}}'><i class='icon-remove-sign'></i></a>
+		</div>
+	</div>
+	<div class='inner'>
+		<div class='messages'>
+			<ul>
+				{{#each messages}}
+					<li>
+						<div class='wrapper'>
+							<pre><strong>{{name displayName ../me author}}: </strong>{{message}}</pre>
+						</div>
+					</li>
+				{{/each}}
+			</ul>
+		</div>
+		<form>
+			<textarea></textarea>
+			<div class='tr'><input type='submit' value='Send' class='btn btn-primary'></div>
+		</form>
+	</div>
+</div>
