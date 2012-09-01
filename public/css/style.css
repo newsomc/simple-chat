@@ -76,7 +76,7 @@ body .chat-box .inner {
 }
 body .chat-box textarea {
   width: 250px;
-  height: 50px;
+  height: 70px;
 }
 body .chat-box form {
   margin: 0;
@@ -84,7 +84,7 @@ body .chat-box form {
 body .chat-box .messages {
   width: 244px;
   padding: 0 7px;
-  height: 120px;
+  height: 300px;
   margin-bottom: 4px;
   overflow-y: scroll;
 }
@@ -117,8 +117,6 @@ body .chat-box pre {
   padding: 0;
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  word-break: break-all;
-  word-wrap: break-word;
   white-space: pre;
   white-space: pre-wrap;
   background: none;
