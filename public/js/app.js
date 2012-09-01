@@ -63,7 +63,7 @@
 	};
 
 	ChatBox.prototype.scroll_to_bottom = function(){
-		this.$messages_div.scrollTop(this.$messages_div.height()+200);
+		this.$messages_div.scrollTop(this.$messages_div[0].scrollHeight);
 	};
 
 	ChatBox.prototype.shift = function(count){
@@ -156,7 +156,7 @@
 
 	ChatList.prototype.message = function(data){
 		this.open_chat_box(data.from, $.proxy(function(){
-			this.open_chats[data.from].render_message(data);
+			this.open_chats[data.from].obj.render_message(data);
 		}, this));
 	};
 
