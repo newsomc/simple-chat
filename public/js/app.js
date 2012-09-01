@@ -10,7 +10,7 @@
 		this.count = count-1;
 		this.has_focus = false;
 		this.is_focusing = false;
-		this.is_focusing_timer = 150;
+		this.is_focusing_timer = 20;
 		this.me = me;
 		this.keep_notifying = false;
 		this.title_change_timer = 1000;
@@ -42,9 +42,8 @@
 	};
 
 	ChatBox.prototype.notify = function(){
-		this.$el.addClass('notify');
-
 		if(this.keep_notifying){
+			this.$el.addClass('notify');
 			setTimeout($.proxy(function(){
 				document.title = this.notification_message;
 
@@ -124,7 +123,7 @@
 	ChatBox.prototype.listeners = function(){
 		this.$el.on('submit', 'form', $.proxy(this.submit, this));
 		this.$el.on('keydown', $.proxy(this.keypress, this));
-		this.$el.on('focus', 'form', $.proxy(this.focus, this));
+		this.$el.on('focus click', 'form', $.proxy(this.focus, this));
 		this.$el.on('blur', 'form', $.proxy(this.blur, this));
 	};
 
@@ -147,6 +146,7 @@
 		this.$messages = this.$el.find('.messages ul');
 		this.scroll_to_bottom();
 		this.listeners();
+		this.$el.find('textarea').focus();
 		if(this.cb){ this.cb(); }
 	};
 
