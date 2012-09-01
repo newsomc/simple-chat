@@ -8,10 +8,20 @@
 		this.socket = socket;
 		this.user = user;
 		this.count = count-1;
+		this.has_focus = false;
+		this.is_focusing = false;
+		this.is_focusing_timer = 150;
 		this.me = me;
+		this.keep_notifying = false;
+		this.title_change_timer = 1000;
 		this.last_active = new Date();
 		this.initialize();
+		this.notification_message = '';
 		this.cb = render_cb;
+	};
+
+	ChatBox.prototype.set_notification = function(data){
+		this.notification_message = String(data.displayName + ' says ' + data.message).slice(0,30);
 	};
 
 	ChatBox.prototype.render_message = function(data){
@@ -19,7 +29,38 @@
 			displayName: data.displayName,
 			message: data.message
 		}) );
+		this.set_notification({
+			displayName: data.displayName,
+			message: data.message
+		});
 		this.scroll_to_bottom();
+
+		if(!this.has_focus){
+			this.keep_notifying = true;
+			this.notify();
+		}
+	};
+
+	ChatBox.prototype.notify = function(){
+		this.$el.addClass('notify');
+
+		if(this.keep_notifying){
+			setTimeout($.proxy(function(){
+				document.title = this.notification_message;
+
+				setTimeout($.proxy(function(){
+					document.title = 'Chat';
+					this.notify();
+				}, this), this.title_change_timer);
+
+
+			}, this), this.title_change_timer);
+		}
+	};
+
+	ChatBox.prototype.unnotify = function(){
+		this.$el.removeClass('notify');
+		this.keep_notifying = false;
 	};
 
 	ChatBox.prototype.submit = function(e){
@@ -42,8 +83,12 @@
 		$textarea.val('');
 	};
 
-	ChatBox.prototype.keypress = function(e){
+	ChatBox.prototype.is_active = function(){
 		this.active = new Date().getTime();
+	};
+
+	ChatBox.prototype.keypress = function(e){
+		this.is_active();
 		if(e.which === 13 && !e.shiftKey){
 			this.submit(e);
 		}
@@ -57,9 +102,30 @@
 		this.$el.remove();
 	};
 
+	ChatBox.prototype.focus = function(){
+		if(!this.is_focusing){
+			this.is_active();
+			this.unnotify();
+			this.has_focus = true;
+			this.is_focusing = true;
+
+			setTimeout($.proxy(function(){
+
+				this.is_focusing = false;
+
+			}, this), this.is_focusing_timer);
+		}
+	};
+
+	ChatBox.prototype.blur = function(){
+		this.has_focus = false;
+	};
+
 	ChatBox.prototype.listeners = function(){
 		this.$el.on('submit', 'form', $.proxy(this.submit, this));
-		this.$el.on('keydown', 'form', $.proxy(this.keypress, this));
+		this.$el.on('keydown', $.proxy(this.keypress, this));
+		this.$el.on('focus', 'form', $.proxy(this.focus, this));
+		this.$el.on('blur', 'form', $.proxy(this.blur, this));
 	};
 
 	ChatBox.prototype.scroll_to_bottom = function(){
@@ -73,6 +139,7 @@
 
 	ChatBox.prototype.render = function(data){
 		this.chat = data;
+		data.count = this.count;
 		this.$el = $(Handlebars.templates['chat-box'](data));
 		$('body').append( this.$el );
 		this.shift(this.count);
@@ -116,7 +183,7 @@
 		})[0].obj.user);
 	};
 
-	ChatList.prototype.open_chat_box = function(user, cb){
+	ChatList.prototype.open_chat_box = function(user, cb, data){
 		if(this.open_chats[user]){
 			if(cb){ cb(); }
 			return;
@@ -127,7 +194,11 @@
 			this.close_earliest_active_chat();
 		}
 		this.open_chats[user] = {
-			obj: new ChatBox(this.socket, user, this.open_chat_count, this.me),
+			obj: new ChatBox(this.socket, user, this.open_chat_count, this.me, $.proxy(function(){
+				this.open_chats[user].obj.set_notification(data);
+				this.open_chats[user].obj.keep_notifying = true;
+				this.open_chats[user].obj.notify();
+			}, this)),
 			sort: this.open_chat_count
 		};
 	};
@@ -157,7 +228,7 @@
 	ChatList.prototype.message = function(data){
 		this.open_chat_box(data.from, $.proxy(function(){
 			this.open_chats[data.from].obj.render_message(data);
-		}, this));
+		}, this), data);
 	};
 
 	ChatList.prototype.close = function(user){

@@ -58,6 +58,9 @@ body {
   vertical-align: top;
   background-color: #3DAD6B;
 }
+body .chat-box.notify .titlebar {
+  background: -webkit-linear-gradient(top, #eb8955, #e07a42);
+}
 body .chat-box {
   position: fixed;
   right: 0;
