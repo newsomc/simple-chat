@@ -90,6 +90,7 @@ body .chat-box .messages {
   height: 300px;
   margin-bottom: 4px;
   overflow-y: scroll;
+  overflow-x: none;
 }
 body .chat-box .messages ul {
   padding: 0;
