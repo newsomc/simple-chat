@@ -103,18 +103,53 @@ module.exports.get_user_data = function(req, res){
 
 module.exports.receive_user_status = function(req, res){
 
-	var user_id = req.session.passport.user._id;
+	var user = req.session.passport.user;
 	var current_status = req.body.user.current_status;
 
-	models.UserStatus.findOneAndUpdate({user: user_id}, {$set: {currentlyWorkingOn: current_status}}, {safe: true}, function (err, foundDocument) {
-	    if (err){
-	        console.log(err);
-	        console.log('found',foundDocument);
-	        res.status(500).send();
-	        return;
-	    }else{
-	        console.log('Found document', foundDocument);
-	        res.redirect('/');
-	    }
-	});
+	models.UserStatus.findOne({
+		user: user
+	}, function(err, us){
+		if(err || !us){
+			console.log('US was found!', us);
+			add_user_status(err, us, user, current_status);
+			return;
+		}
+		console.log('But updating anyhow!');
+		update_user_status(err, us);
+	}.bind(this));
+
+	res.redirect('/');
 };
+
+var add_user_status = function(err, us, user, current_status){
+
+	console.log('Calling add_user_status!');
+	var us = new models.UserStatus({
+		user: user._id,
+		displayName: user.displayName,
+		status: 'active',
+		currentlyWorkingOn: current_status
+	});
+	console.log('THE USER OBJ!', us);
+
+	us.save();
+};
+
+
+var update_user_status = function(err, us){
+	if(!err){
+		models.UserStatus.findOneAndUpdate({user: user_id}, {$set: {currentlyWorkingOn: current_status}}, {safe: true}, function (err, foundDocument) {
+		    if (err){
+		        console.log(err);
+		        console.log('Error found',foundDocument);
+		        res.status(500).send();
+		        return;
+		    }else{
+		        console.log('Found document', foundDocument);
+		        res.redirect('/');
+		    }
+		});
+	}
+};
+
+
