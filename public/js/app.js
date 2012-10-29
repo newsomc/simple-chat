@@ -254,6 +254,10 @@
 	ChatList.prototype.listeners = function(){
 		$('body').on('click', '.close-chat-box', $.proxy(this.close_chat_box, this));
 
+		$('currentWork').click(function(){
+			alert("Yo!");
+		});
+
 		$(document).on('close-chat-box', $.proxy(function(e, data){
 			this.close(data.user);
 		}, this));

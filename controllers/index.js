@@ -110,11 +110,10 @@ module.exports.receive_user_status = function(req, res){
 		user: user
 	}, function(err, us){
 		if(err || !us){
-			console.log('US was found!', us);
 			add_user_status(err, us, user, current_status);
 			return;
 		}
-		console.log('But updating anyhow!');
+
 		update_user_status(err, us);
 	}.bind(this));
 
@@ -122,19 +121,14 @@ module.exports.receive_user_status = function(req, res){
 };
 
 var add_user_status = function(err, us, user, current_status){
-
-	console.log('Calling add_user_status!');
 	var us = new models.UserStatus({
 		user: user._id,
 		displayName: user.displayName,
 		status: 'active',
 		currentlyWorkingOn: current_status
 	});
-	console.log('THE USER OBJ!', us);
-
 	us.save();
 };
-
 
 var update_user_status = function(err, us){
 	if(!err){
