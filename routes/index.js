@@ -36,13 +36,16 @@ exports.hook = function(app){
 	app.get('/me.json', ensureAuthenticated, controllers.me);
 	app.get('/find-chat/:user_id.json', ensureAuthenticated, controllers.find_chat);
 	app.get('/online-users.json', ensureAuthenticated, controllers.online_users);
-
+	//app.get('/user-current-status.json', ensureAuthenticated, controllers.user_current_status);
+	
 	/* Passport Routes */
 	app.get('/auth/google', passport.authenticate('google'));
-	app.get('/auth/google/return', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }));
+	app.get('/auth/google/return', passport.authenticate('google', { successRedirect: '/user-data', failureRedirect: '/login' }));
 	app.get('/logout', function(req, res){ req.logOut(); res.redirect('/login'); });
 	app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }) );
 	app.get('/login', function(req, res){ res.render('login'); });
+	app.get('/user-data', controllers.get_user_data);
+	app.post('/send-user-status', controllers.receive_user_status);
 };
 
 var find_or_create_user = function(identifier, profile, cb){
