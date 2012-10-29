@@ -45,8 +45,6 @@ var find_chat = function(me, other_user, cb){
 			cb(err, chat);
 			return;
 		}
-
-
 		models.Chat.findOne({
 			user_1: other_user,
 			user_2: me
@@ -93,5 +91,30 @@ module.exports.find_chat = function(req, res){
 		find_or_create_chat(req.session.passport.user._id, other_user, function(chat){
 			res.send(chat);
 		});
+	});
+};
+
+module.exports.get_user_data = function(req, res){
+	var username = req.session.passport.user;
+	var firstName = username.name.givenName;
+	var myWorkMessage = "Welcome, " + firstName + "! What are you working on today?";
+	res.render('user-data', { testMessage: myWorkMessage});
+};
+
+module.exports.receive_user_status = function(req, res){
+
+	var user_id = req.session.passport.user._id;
+	var current_status = req.body.user.current_status;
+
+	models.UserStatus.findOneAndUpdate({user: user_id}, {$set: {currentlyWorkingOn: current_status}}, {safe: true}, function (err, foundDocument) {
+	    if (err){
+	        console.log(err);
+	        console.log('found',foundDocument);
+	        res.status(500).send();
+	        return;
+	    }else{
+	        console.log('Found document', foundDocument);
+	        res.redirect('/');
+	    }
 	});
 };
