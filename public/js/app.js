@@ -64,7 +64,6 @@
 
 	ChatBox.prototype.submit = function(e){
 		e.preventDefault();
-		//
 		var $textarea = this.$el.find('textarea');
 		var message = $textarea.val();
 		this.render_message({
@@ -171,6 +170,7 @@
 	};
 
 	ChatList.prototype.render = function(data){
+		console.log('hi!', data);
 		this.$el.html( Handlebars.templates['chat-list']({
 			me: this.me,
 			users: data
@@ -270,6 +270,8 @@
 		this.listeners();
 		this.load();
 	};
+
+	/* Current Status */
 
 
 

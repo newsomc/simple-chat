@@ -8,3 +8,4 @@ Handlebars.registerHelper('ifnotme', function(me, author, options){
 		return options.fn(this);
 	};
 });
+
