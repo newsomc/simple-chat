@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  div.container
+    div.row
+      div.span4.offset4
+        div.teaser
+          div #{testMessage}
+          form(method="post", id="user-data-form", action='send-user-status')
+            p
+              input(type="text-area", name="user[current_status]")
+            
+            p.buttons
+              input(type="submit", value="Update")
