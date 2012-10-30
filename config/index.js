@@ -7,7 +7,7 @@ nconf.defaults({
 	mongo_host: 'localhost',
 	mongo_db: 'Chat',
 	port: 8086,
-	url: 'http://127.0.0.1:8086',
+	url: 'http://10.0.1.5:8086',
 	session_secret: "goes-in-production.json",
 	socket_log_level: 3,
 	transports: 'websocket'
