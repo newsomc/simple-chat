@@ -5,6 +5,7 @@ var C = require('./../config'),
 	Schema = mongoose.Schema;
 
 mongoose.connect(util.format('mongodb://%s:%s/%s', nconf.get('mongo_host'), nconf.get('mongo_port'), nconf.get('mongo_db')));
+mongoose.set('debug', true);
 
 var User = new Schema({
 	id: {type: String, unique: true},
@@ -34,6 +35,13 @@ var UserStatus = new Schema({
 	user: mongoose.Schema.Types.ObjectId,
 	displayName: String,
 	client_id: String,
-	status: String
+	status: String,
 });
 module.exports.UserStatus = mongoose.model('UserStatus', UserStatus);
+
+var UserWorkingStatus = new Schema({
+	user: mongoose.Schema.Types.ObjectId,
+	ts: {type: Date, default: Date.now},
+	currentlyWorkingOn: String
+});
+module.exports.UserWorkingStatus = mongoose.model('UserWorkingStatus', UserWorkingStatus);

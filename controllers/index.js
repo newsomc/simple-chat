@@ -1,4 +1,5 @@
-var models = require('./../models');
+var models = require('./../models'),
+	manager = require('./../lib/user-manager');
 
 module.exports.me = function(req, res){
 	res.send(req.session.passport.user);
@@ -93,5 +94,71 @@ module.exports.find_chat = function(req, res){
 		find_or_create_chat(req.session.passport.user._id, other_user, function(chat){
 			res.send(chat);
 		});
+	});
+};
+
+module.exports.get_users_working_status = function(req, res){
+	var username = req.session.passport.user;
+	var firstName = username.name.givenName;
+	var myWorkMessage = "Welcome, " + firstName + "! What are you working on today?";
+	res.render('user-working-data-form', { testMessage: myWorkMessage});
+};
+
+module.exports.receive_users_working_status = function(req, res){
+	var user = req.session.passport.user;
+	var current_status = req.body.user.current_status;
+	models.UserWorkingStatus.findOne({
+		user: user
+	}, function(err, us){
+		if(err || !us){
+			add_users_working_status(err, us, user, current_status);
+			return;
+		}
+		update_users_working_status(err, us, current_status);
+	}.bind(this));
+	res.redirect('/');
+};
+
+var add_users_working_status = function(err, us, user, current_status){
+	var uws = new models.UserWorkingStatus({
+		user: user._id,
+		currentlyWorkingOn: current_status
+	});
+	uws.save();
+};
+
+var update_users_working_status = function(err, us, current_status){
+	if(!err){
+		models.UserWorkingStatus.findOneAndUpdate({
+			user: user_id
+			}, { $set: {currentlyWorkingOn: current_status}}, { safe: true }, 
+			function (err, foundDocument) {
+		    	if (err){
+		        console.log(err);
+		        console.log('Error found',foundDocument);
+		        res.status(500).send();
+		        return;
+		    }else{
+		        console.log('Found document', foundDocument);
+		        res.redirect('/');
+		    }
+		});
+	}
+};
+
+module.exports.users_working_status_json = function(req, res){
+	models.UserWorkingStatus
+	.find({})
+	.sort({ts: -1})
+	.exec(function(err, docs){
+		if(err){
+			res.send({
+				err: {
+					type: 'global'
+				}
+			});
+			return;
+		}
+		res.send(docs);
 	});
 };
