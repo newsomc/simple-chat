@@ -15,6 +15,7 @@ var express = require('express')
   , cookie = require('cookie')
   , socketio = require("socket.io")
   , fs = require('fs')
+  , flash = require('connect-flash')
   , passport = require('passport');
 
 
@@ -43,8 +44,10 @@ app.configure(function(){
   app.use(express.cookieParser(nconf.get('session_secret')));
   app.use(express.session({ 
     secret: nconf.get('session_secret'),
-    store: sessionStore
+    store: sessionStore,
+    cookie: { maxAge: 60000}
   }));
+  app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(app.router);
@@ -55,10 +58,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-
-
 routes.hook(app);
-
 
 var server = http.createServer(app).listen(nconf.get('port'), function(){
   winston.info(util.format("Express server listening on port %s", nconf.get('port')));
@@ -90,3 +90,4 @@ fs.exists(ga_file, function(exists){
     fs.writeFile(ga_file, '');
   }
 });
+
