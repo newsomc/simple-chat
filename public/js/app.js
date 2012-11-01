@@ -271,7 +271,51 @@
 		this.load();
 	};
 
+	/* Current User */
 
+	var CurrentUser = function(socket, me){
+		this.socket = socket;
+		this.me = me;
+		this.list_template = Handlebars.compile()
+		this.initialize();
+		this.loading = false;
+	};
+
+	CurrentUser.prototype.render = function(data){
+		this.$el.html( Handlebars.templates['current-user']({
+			me: this.me,
+			users: data
+		}) );
+	};
+
+	CurrentUser.prototype.load = function(){
+		if(!this.loading){
+			this.loading = true;
+
+			setTimeout($.proxy(function(){
+				this.loading = false;
+
+				$.ajax({
+					url: '/user-working-status.json',
+					success: $.proxy(this.render, this)
+				});
+
+			}, this), 150);
+		}
+	};
+
+	CurrentUser.prototype.alert_me_e = function(e){
+		e.preventDefault();
+		console.log("Hi Clint...");
+	};
+
+	CurrentUser.prototype.initialize = function(){
+		$(document).ready($.proxy(function(){
+			this.$el = $('.current-user');
+			this.$el.on('click', 'a', $.proxy(this.alert_me_e, this));
+		}, this));
+		this.load();
+	};
 
 	/* App */
 
