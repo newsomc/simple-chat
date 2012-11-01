@@ -95,3 +95,63 @@ module.exports.find_chat = function(req, res){
 		});
 	});
 };
+
+module.exports.receive_users_working_status = function(req, res){
+	var user = req.session.passport.user;
+	var current_status = req.body.user.current_status;
+	models.UserWorkingStatus.findOne({
+		user: user
+	}, function(err, us){
+		if(err || !us){
+			add_users_working_status(err, us, user, current_status);
+			return;
+		}
+		update_users_working_status(err, us, current_status);
+	}.bind(this));
+	req.flash('info', 'Your status is %s', current_status);
+	res.redirect('/');
+};
+
+var add_users_working_status = function(err, us, user, current_status){
+	var uws = new models.UserWorkingStatus({
+		user: user._id,
+		currentlyWorkingOn: current_status
+	});
+	uws.save();
+};
+
+var update_users_working_status = function(err, us, current_status){
+	if(!err){
+		models.UserWorkingStatus.findOneAndUpdate({
+			user: user_id
+			}, { $set: {currentlyWorkingOn: current_status}}, { safe: true }, 
+			function (err, foundDocument) {
+		    	if (err){
+		        console.log(err);
+		        console.log('Error found',foundDocument);
+		        res.status(500).send();
+		        return;
+		    }else{
+		        console.log('Found document', foundDocument);
+		        res.redirect('/');
+		    }
+		});
+	}
+};
+
+module.exports.users_working_status_json = function(req, res){
+	models.UserWorkingStatus
+	.find({})
+	.sort({ts: -1})
+	.exec(function(err, docs){
+		if(err){
+			res.send({
+				err: {
+					type: 'global'
+				}
+			});
+			return;
+		}
+		res.send(docs);
+	});
+};
