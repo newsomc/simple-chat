@@ -37,3 +37,10 @@ var UserStatus = new Schema({
 	status: String
 });
 module.exports.UserStatus = mongoose.model('UserStatus', UserStatus);
+
+var UserWorkingStatus = new Schema({
+	user: mongoose.Schema.Types.ObjectId,
+	ts: {type: Date, default: Date.now},
+	currentlyWorkingOn: String
+});
+module.exports.UserWorkingStatus = mongoose.model('UserWorkingStatus', UserWorkingStatus);
